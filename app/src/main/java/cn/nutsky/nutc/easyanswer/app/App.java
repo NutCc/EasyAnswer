@@ -1,10 +1,10 @@
-package cn.nutsky.nutc.easyanswer;
+package cn.nutsky.nutc.easyanswer.app;
 
 import android.app.Application;
 
 import com.avos.avoscloud.AVOSCloud;
 
-import cn.nutsky.nutc.easyanswer.appconst.Api;
+import cn.nutsky.nutc.easyanswer.config.Api;
 
 /**
  * Created by NutC on 2016/10/30.

@@ -1,0 +1,140 @@
+package cn.nutsky.nutc.easyanswer.ui.activity;
+
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.SaveCallback;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.app.activity.BaseDoubleClickActivity;
+import cn.nutsky.nutc.easyanswer.ui.frangent.HomeFragment;
+import cn.nutsky.nutc.easyanswer.ui.frangent.MeFragment;
+import cn.nutsky.nutc.easyanswer.ui.frangent.OnlineFragment;
+
+import static com.tencent.qc.stat.StatReportStrategy.f;
+
+
+public class MainActivity extends BaseDoubleClickActivity {
+
+    private BottomNavigationView bottomNavigationView;
+    private Toolbar mToolbar;
+    private HomeFragment homeFragment;
+    private MeFragment meFragment;
+    private OnlineFragment onlineFragment;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        homeFragment = new HomeFragment();
+        onlineFragment = new OnlineFragment();
+        meFragment = new MeFragment();
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView
+                .OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                onNavigationItemSelect(item.getItemId());
+                return false;
+            }
+        });
+
+        AVObject questionObject = new AVObject("Question");
+        questionObject.put("label","English");
+        questionObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                if(e == null){
+                    Log.d("saved","success!");
+                }
+            }
+        });
+
+        selectNavigationItem(1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.toolbar_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.home_bar_search:
+                Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return true;
+    }
+
+    private void onNavigationItemSelect(int itemId) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        switch(itemId){
+            case R.id.nv_online:
+                transaction.replace(R.id.framelayout,onlineFragment);
+                break;
+            case R.id.nv_home:
+                transaction.replace(R.id.framelayout,homeFragment);
+                break;
+            case R.id.nv_me:
+                transaction.replace(R.id.framelayout,meFragment);
+                break;
+        }
+        transaction.commit();
+    }
+
+    private void selectNavigationItem(int position) {
+        try {
+            BottomNavigationMenuView bottomNavigationMenuView = null;
+            Field[] fields = BottomNavigationView.class.getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(true);
+                String type = field.getType().toString();
+                if (type.endsWith("BottomNavigationMenuView")) {
+                    bottomNavigationMenuView = (BottomNavigationMenuView) field.get(bottomNavigationView);
+                }
+            }
+            if (bottomNavigationMenuView != null) {
+                Method activateNewButton;
+                activateNewButton = BottomNavigationMenuView.class.getDeclaredMethod("activateNewButton", int.class);
+                activateNewButton.setAccessible(true);
+                activateNewButton.invoke(bottomNavigationMenuView, position);
+            }
+            onNavigationItemSelect(R.id.nv_home);
+        } catch(NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch(IllegalAccessException e) {
+            e.printStackTrace();
+        } catch(InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+}

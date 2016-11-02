@@ -7,3 +7,6 @@
 /build
 /captures
 .externalNativeBuild
+libs/
+src/main/java/cn/nutsky/nutc/easyanswer/appconst/
+src/main/res/drawable/

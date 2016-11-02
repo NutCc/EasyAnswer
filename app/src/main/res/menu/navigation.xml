@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nv_online"
+        android:icon="@drawable/abc"
+        android:title="anser"/>
+    <item
+        android:id="@+id/nv_home"
+        android:icon="@drawable/abc"
+        android:title="home"/>
+    <item
+        android:id="@+id/nv_me"
+        android:icon="@drawable/abc"
+        android:title="me"/>
+
+</menu>

@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--Status bar color-->
+    <color name="statusColor">#000000</color>
+    <!-- toolBar color -->
+    <color name="toolBarColor">#444445</color>
+    <!--EditText,RadioButton,CheckBox color-->
+    <color name="editColor">#737272</color>
+    <!--Window color-->
+    <color name="widowColor">#ffffff</color>
 </resources>
