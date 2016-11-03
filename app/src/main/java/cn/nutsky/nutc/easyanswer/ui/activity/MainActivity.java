@@ -1,22 +1,17 @@
 package cn.nutsky.nutc.easyanswer.ui.activity;
 
+
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.SaveCallback;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -24,11 +19,9 @@ import java.lang.reflect.Method;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.app.activity.BaseDoubleClickActivity;
-import cn.nutsky.nutc.easyanswer.ui.frangent.HomeFragment;
-import cn.nutsky.nutc.easyanswer.ui.frangent.MeFragment;
-import cn.nutsky.nutc.easyanswer.ui.frangent.OnlineFragment;
-
-import static com.tencent.qc.stat.StatReportStrategy.f;
+import cn.nutsky.nutc.easyanswer.ui.fragment.HomeFragment;
+import cn.nutsky.nutc.easyanswer.ui.fragment.MeFragment;
+import cn.nutsky.nutc.easyanswer.ui.fragment.OnlineFragment;
 
 
 public class MainActivity extends BaseDoubleClickActivity {
@@ -62,7 +55,9 @@ public class MainActivity extends BaseDoubleClickActivity {
             }
         });
 
-        AVObject questionObject = new AVObject("Question");
+
+
+       /*AVObject questionObject = new AVObject("Question");
         questionObject.put("label","English");
         questionObject.saveInBackground(new SaveCallback() {
             @Override
@@ -71,7 +66,7 @@ public class MainActivity extends BaseDoubleClickActivity {
                     Log.d("saved","success!");
                 }
             }
-        });
+        });*/
 
         selectNavigationItem(1);
     }
@@ -82,13 +77,16 @@ public class MainActivity extends BaseDoubleClickActivity {
         getMenuInflater().inflate(R.menu.toolbar_search, menu);
         return true;
     }
-
+    //Todo 搜索框
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.home_bar_search:
                 Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.toolbar_history:
+                Toast.makeText(this, "bbb", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;
@@ -99,12 +97,21 @@ public class MainActivity extends BaseDoubleClickActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         switch(itemId){
             case R.id.nv_online:
+                setTitle("在线答疑");
+                mToolbar.getMenu().clear();
+                mToolbar.inflateMenu(R.menu.menu_toolbar_online);
                 transaction.replace(R.id.framelayout,onlineFragment);
                 break;
             case R.id.nv_home:
+                setTitle("易答");
+                mToolbar.getMenu().clear();
+                mToolbar.inflateMenu(R.menu.toolbar_search);
                 transaction.replace(R.id.framelayout,homeFragment);
                 break;
             case R.id.nv_me:
+                setTitle("我的");
+                mToolbar.getMenu().clear();
+                mToolbar.inflateMenu(R.menu.menu_toolbar_me);
                 transaction.replace(R.id.framelayout,meFragment);
                 break;
         }
@@ -136,5 +143,9 @@ public class MainActivity extends BaseDoubleClickActivity {
         } catch(InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setTitle(String title) {
+        ((TextView) findViewById(R.id.tv_title)).setText(title);
     }
 }

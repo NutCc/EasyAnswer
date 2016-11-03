@@ -8,6 +8,7 @@ import android.widget.Button;
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.app.activity.BaseActivity;
 import cn.nutsky.nutc.easyanswer.ui.widget.BackToolbar;
+import cn.nutsky.nutc.easyanswer.utils.ActivityCollector;
 
 public class SignUpActivity extends BaseActivity {
     private Button button_sign_login;
@@ -23,7 +24,7 @@ public class SignUpActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
                 startActivity(intent);
-                finish();
+                ActivityCollector.finishAll();
             }
         });
         mToolbar = (BackToolbar) findViewById(R.id.toolbar);

@@ -26,7 +26,7 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-
+        <activity android:name=".ui.activity.BecomeTeacherActivity" />
         <activity android:name="com.avos.avoscloud.feedback.ThreadActivity" />
         <activity android:name=".ui.activity.LoginActivity" >
             <intent-filter>

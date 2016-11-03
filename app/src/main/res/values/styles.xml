@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,7 +11,7 @@
     <!--Status bar color-->
     <color name="statusColor">#000000</color>
     <!-- toolBar color -->
-    <color name="toolBarColor">#444445</color>
+    <color name="toolBarColor">#bebebe</color>
     <!--EditText,RadioButton,CheckBox color-->
     <color name="editColor">#737272</color>
     <!--Window color-->

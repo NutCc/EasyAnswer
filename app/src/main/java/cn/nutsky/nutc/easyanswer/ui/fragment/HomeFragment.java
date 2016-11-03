@@ -1,4 +1,4 @@
-package cn.nutsky.nutc.easyanswer.ui.frangent;
+package cn.nutsky.nutc.easyanswer.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.data.Question;
+import cn.nutsky.nutc.easyanswer.ui.activity.MainActivity;
 import cn.nutsky.nutc.easyanswer.ui.adapter.HomeAdapter;
 
 /**
@@ -25,6 +26,11 @@ public class HomeFragment extends Fragment {
     private List<Question> mQuestion = new ArrayList<>();
     private HomeAdapter mHomeAdapter;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -45,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     private void getQuestion(){
         for (int i = 0; i < 50; i++) {
-            mQuestion.add(new Question(i + ""));
+            mQuestion.add(new Question("label","hahaha"));
         }
         mHomeAdapter.notifyDataSetChanged();
     }

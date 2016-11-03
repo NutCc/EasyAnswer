@@ -1,4 +1,4 @@
-package cn.nutsky.nutc.easyanswer.ui.frangent;
+package cn.nutsky.nutc.easyanswer.ui.fragment;
 
 
 import android.os.Bundle;
