@@ -1,6 +1,7 @@
 package cn.nutsky.nutc.easyanswer.ui.activity;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import cn.nutsky.nutc.easyanswer.ui.fragment.HomeFragment;
 import cn.nutsky.nutc.easyanswer.ui.fragment.MeFragment;
 import cn.nutsky.nutc.easyanswer.ui.fragment.OnlineFragment;
 
+import static java.security.AccessController.getContext;
+
 
 public class MainActivity extends BaseDoubleClickActivity {
 
@@ -31,6 +36,7 @@ public class MainActivity extends BaseDoubleClickActivity {
     private HomeFragment homeFragment;
     private MeFragment meFragment;
     private OnlineFragment onlineFragment;
+    private ImageView mAskButton;
 
 
     @Override
@@ -43,6 +49,7 @@ public class MainActivity extends BaseDoubleClickActivity {
         meFragment = new MeFragment();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -55,7 +62,13 @@ public class MainActivity extends BaseDoubleClickActivity {
             }
         });
 
-
+        mAskButton = (ImageView) findViewById(R.id.iv_ask);
+        mAskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "ask", Toast.LENGTH_SHORT).show();
+            }
+        });
 
        /*AVObject questionObject = new AVObject("Question");
         questionObject.put("label","English");
@@ -94,23 +107,36 @@ public class MainActivity extends BaseDoubleClickActivity {
 
     private void onNavigationItemSelect(int itemId) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
         switch(itemId){
             case R.id.nv_online:
                 setTitle("在线答疑");
+                mAskButton.setVisibility(View.GONE);
                 mToolbar.getMenu().clear();
                 mToolbar.inflateMenu(R.menu.menu_toolbar_online);
                 transaction.replace(R.id.framelayout,onlineFragment);
+                mToolbar.setNavigationIcon(R.drawable.ic_add_black_24dp);
+                mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(view.getContext(), CreateClassroomActivity.class);
+                        startActivity(intent);
+                    }
+                });
                 break;
             case R.id.nv_home:
                 setTitle("易答");
+                mAskButton.setVisibility(View.VISIBLE);
                 mToolbar.getMenu().clear();
+                mToolbar.setNavigationIcon(null);
                 mToolbar.inflateMenu(R.menu.toolbar_search);
                 transaction.replace(R.id.framelayout,homeFragment);
                 break;
             case R.id.nv_me:
                 setTitle("我的");
+                mAskButton.setVisibility(View.GONE);
                 mToolbar.getMenu().clear();
+                mToolbar.setNavigationIcon(null);
                 mToolbar.inflateMenu(R.menu.menu_toolbar_me);
                 transaction.replace(R.id.framelayout,meFragment);
                 break;
