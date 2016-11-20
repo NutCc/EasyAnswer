@@ -10,34 +10,18 @@
         android:id="@+id/toolbar"
         layout="@layout/include_back_toolbar" />
     <EditText
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:background="@drawable/shape_edit"
-        android:theme="@style/EditTheme"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_height="40dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/et_Title" />
-
-    <EditText
+        android:id="@+id/et_Content"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:padding="16dp"
+        android:padding="6dp"
         android:background="@drawable/shape_edit"
         android:theme="@style/EditTheme"
         android:layout_width="match_parent"
         android:gravity="top"
-        android:layout_height="150dp"
-        android:layout_below="@+id/et_Title"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/et_Content" />
+        android:hint="请输入简要内容"
+        android:layout_height="100dp"
+        android:layout_below="@+id/toolbar" />
     <LinearLayout
         android:layout_marginTop="8dp"
         android:layout_marginLeft="10dp"
@@ -50,18 +34,24 @@
             android:background="@drawable/shape_edit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="日期"
             android:layout_weight="1"/>
         <EditText
             android:background="@drawable/shape_edit"
             android:layout_marginRight="2dp"
             android:layout_marginLeft="2dp"
             android:layout_width="0dp"
+            android:gravity="center"
+            android:hint="起始时刻"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
         <EditText
             android:background="@drawable/shape_edit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="结束时刻"
             android:layout_weight="1"/>
 
     </LinearLayout>

@@ -9,4 +9,5 @@
     <color name="itemOnline">#7003a9f4</color>
     <color name="line">#aaa</color>
     <color name="warning">#E53935</color>
+    <color name="label">#FFAB00</color>
 </resources>

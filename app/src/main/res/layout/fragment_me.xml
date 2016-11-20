@@ -40,9 +40,11 @@
             android:textSize="16sp" />
         <TextView
             android:id="@+id/line_one"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_below="@id/tv_my_question"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_my_collection"
@@ -56,8 +58,10 @@
         <TextView
             android:id="@+id/line_two"
             android:layout_below="@id/tv_my_collection"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_have_ansered"
@@ -71,8 +75,10 @@
         <TextView
             android:id="@+id/line_three"
             android:layout_below="@id/tv_have_ansered"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_my_focous"
@@ -86,8 +92,10 @@
         <TextView
             android:id="@+id/line_four"
             android:layout_below="@id/tv_my_focous"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_student_id"
@@ -101,8 +109,10 @@
         <TextView
             android:id="@+id/line_five"
             android:layout_below="@id/tv_student_id"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_realname"
@@ -117,7 +127,9 @@
             android:id="@+id/line_six"
             android:layout_below="@id/tv_realname"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_class"
@@ -132,7 +144,9 @@
             android:id="@+id/line_seven"
             android:layout_below="@+id/tv_class"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_sex"
@@ -147,7 +161,9 @@
             android:id="@+id/line_eight"
             android:layout_below="@id/tv_sex"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_mail"
@@ -162,7 +178,9 @@
             android:id="@+id/line_nine"
             android:layout_below="@id/tv_mail"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
         <TextView
             android:id="@+id/tv_register_time"
@@ -177,7 +195,9 @@
             android:id="@+id/line_ten"
             android:layout_below="@id/tv_register_time"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="0.5dp"
             android:background="@color/line"/>
 
         <Button

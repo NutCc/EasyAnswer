@@ -28,7 +28,7 @@ public class Question {
         setContent((String) avObject.get("content"));
     }
 
-    public Question(@NonNull String content,  @NonNull String label) {
+    public Question( @NonNull String label,@NonNull String content) {
         this.content = content;
         this.label = label;
     }

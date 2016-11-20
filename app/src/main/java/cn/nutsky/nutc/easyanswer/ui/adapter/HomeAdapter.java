@@ -31,7 +31,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tv.setText(mQuestions.get(position).getLabel());
+        holder.tvLabel.setText(mQuestions.get(position).getLabel());
+        holder.tvContent.setText(mQuestions.get(position).getContent());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,12 +48,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tv;
+        TextView tvLabel;
+        TextView tvContent;
         private CardView mCardView;
         public ViewHolder(View itemView) {
             super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.tv_label);
+            tvLabel = (TextView) itemView.findViewById(R.id.tv_label);
             mCardView = (CardView) itemView.findViewById(R.id.cv_home);
+            tvContent = (TextView) itemView.findViewById(R.id.tv_content);
         }
     }
 }

@@ -52,9 +52,8 @@ public class HomeFragment extends Fragment {
 
     private void getQuestion(){
         for (int i = 0; i < 10; i++) {
-            mQuestion.add(new Question("label","hahaha"));
+            mQuestion.add(new Question("物理","2015年10月29日 - Android 5.x新特性之利用CardView制造温和的阴影效果_利用gradle引进支持包: compile 2015年1月16日 - CardView继承至FrameLayout类,可以在一个卡片布"));
         }
         mHomeAdapter.notifyDataSetChanged();
     }
-
 }

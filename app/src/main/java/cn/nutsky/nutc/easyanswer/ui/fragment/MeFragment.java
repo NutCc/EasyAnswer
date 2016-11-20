@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.ui.activity.BecomeTeacherActivity;
 import cn.nutsky.nutc.easyanswer.ui.activity.LoginActivity;
 import cn.nutsky.nutc.easyanswer.ui.activity.MainActivity;
+import cn.nutsky.nutc.easyanswer.ui.activity.MyQuestionActivity;
 import cn.nutsky.nutc.easyanswer.ui.activity.SignUpActivity;
 import cn.nutsky.nutc.easyanswer.ui.widget.BackToolbar;
 import cn.nutsky.nutc.easyanswer.utils.ActivityCollector;
@@ -27,6 +29,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private Button btExitLogin;
     private Button btBecomeTeacher;
     private Intent intent;
+    private TextView tvMyQuestion;
 
     @Nullable
     @Override
@@ -40,15 +43,20 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         btExitLogin = (Button) view.findViewById(R.id.bt_exit_login);
         btBecomeTeacher = (Button) view.findViewById(R.id.bt_become_teacher);
+        tvMyQuestion = (TextView) view.findViewById(R.id.tv_my_question);
         btExitLogin.setOnClickListener(this);
         btBecomeTeacher.setOnClickListener(this);
+        tvMyQuestion.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_my_question:
-                
+                Toast.makeText(getContext(),"aaa",Toast.LENGTH_SHORT).show();
+                intent = new Intent(getContext(), MyQuestionActivity.class);
+                startActivity(intent);
+                break;
             case R.id.bt_exit_login:
                 intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);

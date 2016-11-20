@@ -40,7 +40,8 @@
         <activity android:name=".ui.activity.CreateClassroomActivity" />
         <activity android:name=".ui.activity.ClassroomActivity" />
         <activity android:name=".ui.activity.QuestionDetailActivity" />
-        <activity android:name=".ui.activity.MyQuestionActivity"></activity>
+        <activity android:name=".ui.activity.MyQuestionActivity" />
+        <activity android:name=".ui.activity.AskActivity"></activity>
     </application>
 
 </manifest>

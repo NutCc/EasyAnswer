@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ask"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nutsky.nutc.easyanswer.ui.activity.AskActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_back_toolbar" />
+    <EditText
+        android:id="@+id/et_Label"
+        android:layout_margin="10dp"
+        android:padding="6dp"
+        android:hint="请输入问题标签"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/shape_edit"/>
+    <EditText
+        android:id="@+id/et_question_content"
+        android:layout_below="@id/et_Label"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="6dp"
+        android:gravity="top"
+        android:hint="请输入问题内容"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/shape_edit"/>
+
+</RelativeLayout>

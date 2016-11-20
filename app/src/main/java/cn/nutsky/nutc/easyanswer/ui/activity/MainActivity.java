@@ -66,7 +66,8 @@ public class MainActivity extends BaseDoubleClickActivity {
         mAskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "ask", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(view.getContext(),AskActivity.class);
+                startActivity(intent);
             }
         });
 

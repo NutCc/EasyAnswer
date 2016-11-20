@@ -3,7 +3,7 @@
     android:id="@+id/cv_home"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="148dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     app:cardCornerRadius="0dp"
@@ -17,19 +17,25 @@
         <TextView
             android:layout_marginTop="6dp"
             android:id="@+id/tv_label"
+            android:paddingRight="6dp"
+            android:paddingLeft="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#1884f0" />
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@color/label"
+            android:text="hahaha"/>
         <TextView
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
             android:layout_below="@id/tv_label"
             android:id="@+id/tv_content"
+            android:ellipsize="end"
+            android:lines="3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
             android:textSize="16sp"
-            android:textIsSelectable="true"
-            android:lineSpacingExtra="4dp"
             android:text="jjjjjjjjjjjiiiii"/>
         <TextView
             android:layout_marginRight="16dp"
