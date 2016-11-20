@@ -3,6 +3,7 @@ package cn.nutsky.nutc.easyanswer.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,7 +51,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getQuestion(){
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             mQuestion.add(new Question("label","hahaha"));
         }
         mHomeAdapter.notifyDataSetChanged();

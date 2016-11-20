@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.MainActivity" />
 
         <service android:name="com.avos.avoscloud.PushService" />
 
@@ -26,16 +26,21 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
         <activity android:name=".ui.activity.BecomeTeacherActivity" />
         <activity android:name="com.avos.avoscloud.feedback.ThreadActivity" />
-        <activity android:name=".ui.activity.LoginActivity" >
+        <activity android:name=".ui.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SignUpActivity"></activity>
+        <activity android:name=".ui.activity.SignUpActivity" />
+        <activity android:name=".ui.activity.CreateClassroomActivity" />
+        <activity android:name=".ui.activity.ClassroomActivity" />
+        <activity android:name=".ui.activity.QuestionDetailActivity" />
+        <activity android:name=".ui.activity.MyQuestionActivity"></activity>
     </application>
 
 </manifest>

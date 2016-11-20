@@ -1,5 +1,7 @@
 package cn.nutsky.nutc.easyanswer.ui.adapter;
 
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import java.util.List;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.data.Question;
+import cn.nutsky.nutc.easyanswer.ui.activity.MainActivity;
+import cn.nutsky.nutc.easyanswer.ui.activity.QuestionDetailActivity;
 
 /**
  * Created by NutC on 2016/11/2.
@@ -23,12 +27,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_home_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home,parent,false));
     }
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tv.setText(mQuestions.get(position).getLabel());
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),QuestionDetailActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -38,9 +48,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView tv;
+        private CardView mCardView;
         public ViewHolder(View itemView) {
             super(itemView);
             tv = (TextView) itemView.findViewById(R.id.tv_label);
+            mCardView = (CardView) itemView.findViewById(R.id.cv_home);
         }
     }
 }

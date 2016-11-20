@@ -12,7 +12,6 @@ import cn.nutsky.nutc.easyanswer.utils.ActivityCollector;
 
 public class SignUpActivity extends BaseActivity {
     private Button button_sign_login;
-    private BackToolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +26,7 @@ public class SignUpActivity extends BaseActivity {
                 ActivityCollector.finishAll();
             }
         });
-        mToolbar = (BackToolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("注册");
+        setTitle("注册");
 
     }
 }

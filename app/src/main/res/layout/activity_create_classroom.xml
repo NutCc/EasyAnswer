@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_classroom"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nutsky.nutc.easyanswer.ui.activity.CreateClassroomActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_back_toolbar" />
+    <EditText
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@drawable/shape_edit"
+        android:theme="@style/EditTheme"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="40dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/et_Title" />
+
+    <EditText
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="16dp"
+        android:background="@drawable/shape_edit"
+        android:theme="@style/EditTheme"
+        android:layout_width="match_parent"
+        android:gravity="top"
+        android:layout_height="150dp"
+        android:layout_below="@+id/et_Title"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/et_Content" />
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/et_Content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <EditText
+            android:background="@drawable/shape_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <EditText
+            android:background="@drawable/shape_edit"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <EditText
+            android:background="@drawable/shape_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

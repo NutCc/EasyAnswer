@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nv_online"
-        android:icon="@drawable/abc"
-        android:title="anser"/>
+        android:icon="@drawable/ic_wifi_black_24dp"
+        android:title="online"/>
     <item
         android:id="@+id/nv_home"
         android:icon="@drawable/abc"
         android:title="home"/>
     <item
         android:id="@+id/nv_me"
-        android:icon="@drawable/abc"
+        android:icon="@drawable/ic_person_outline_black_24dp"
         android:title="me"/>
 
 </menu>

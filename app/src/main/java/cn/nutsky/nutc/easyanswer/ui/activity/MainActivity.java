@@ -119,7 +119,7 @@ public class MainActivity extends BaseDoubleClickActivity {
                 mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), CreateClassroomActivity.class);
+                        Intent intent = new Intent(MainActivity.this, CreateClassroomActivity.class);
                         startActivity(intent);
                     }
                 });

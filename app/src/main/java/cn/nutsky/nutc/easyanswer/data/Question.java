@@ -17,8 +17,8 @@ public class Question {
     private int commentAsk_num;
     private int replay_num;
     private String label;
-    private Date createdAt;
-    private Date updateAt;
+    private String createdAt;
+    private String updateAt;
 
     public Question(AVObject avObject) {
         if (!avObject.getClassName().equals("Question")) {
@@ -48,6 +48,7 @@ public class Question {
     }
 
     public void setContent(String content) {
+
         this.content = content != null ? content : "";
     }
 
@@ -83,23 +84,19 @@ public class Question {
         this.label = label;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setCreatedAt(long time) {
-        this.createdAt = new Date(time);
-    }
-
-    public Date getUpdateAt() {
+    public String getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Date updateAt) {
+    public void setUpdateAt(String updateAt) {
         this.updateAt = updateAt;
     }
 
@@ -107,6 +104,7 @@ public class Question {
         AVObject avObject = new AVObject("Question");
         avObject.setObjectId(objectId);
         avObject.put("content", content);
+        avObject.put("label",label);
         return avObject;
     }
 }

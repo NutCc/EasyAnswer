@@ -5,58 +5,63 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
+            android:id="@+id/ll_icon"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
-            android:background="@color/editColor">
+            android:background="@color/itemOnline">
             <ImageView
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/ic_insert_emoticon_black_24dp"/>
+                android:src="@drawable/aa"/>
             <TextView
-
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="70dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="wanghaha"
                 android:textSize="22sp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
-            android:paddingLeft="20dp"
-            android:gravity="center_vertical"
             android:id="@+id/tv_my_question"
+            android:layout_below="@id/ll_icon"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:text="我的问题"
             android:layout_height="50dp"
             android:textSize="16sp" />
         <TextView
+            android:id="@+id/line_one"
+            android:layout_below="@id/tv_my_question"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_my_collection"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
-            android:id="@+id/tv_my_collection"
+            android:layout_below="@id/line_one"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:textSize="16sp"
             android:text="我的收藏" />
         <TextView
+            android:id="@+id/line_two"
+            android:layout_below="@id/tv_my_collection"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_have_ansered"
+            android:layout_below="@id/line_two"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -64,10 +69,14 @@
             android:textSize="16sp"
             android:text="我回答过" />
         <TextView
+            android:id="@+id/line_three"
+            android:layout_below="@id/tv_have_ansered"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_my_focous"
+            android:layout_below="@id/line_three"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -75,10 +84,14 @@
             android:textSize="16sp"
             android:text="我的关注" />
         <TextView
+            android:id="@+id/line_four"
+            android:layout_below="@id/tv_my_focous"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_student_id"
+            android:layout_below="@id/line_four"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -86,10 +99,14 @@
             android:textSize="16sp"
             android:text="学号/教师号" />
         <TextView
+            android:id="@+id/line_five"
+            android:layout_below="@id/tv_student_id"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_realname"
+            android:layout_below="@id/line_five"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -97,10 +114,14 @@
             android:textSize="16sp"
             android:text="真实姓名" />
         <TextView
+            android:id="@+id/line_six"
+            android:layout_below="@id/tv_realname"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_class"
+            android:layout_below="@+id/line_six"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -108,10 +129,14 @@
             android:textSize="16sp"
             android:text="班级" />
         <TextView
+            android:id="@+id/line_seven"
+            android:layout_below="@+id/tv_class"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_sex"
+            android:layout_below="@id/line_seven"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -119,10 +144,14 @@
             android:textSize="16sp"
             android:text="性别" />
         <TextView
+            android:id="@+id/line_eight"
+            android:layout_below="@id/tv_sex"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_mail"
+            android:layout_below="@id/line_eight"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -130,10 +159,14 @@
             android:textSize="16sp"
             android:text="邮箱" />
         <TextView
+            android:id="@+id/line_nine"
+            android:layout_below="@id/tv_mail"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
         <TextView
+            android:id="@+id/tv_register_time"
+            android:layout_below="@id/line_nine"
             android:paddingLeft="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -141,26 +174,32 @@
             android:textSize="16sp"
             android:text="注册时间" />
         <TextView
+            android:id="@+id/line_ten"
+            android:layout_below="@id/tv_register_time"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000"/>
+            android:background="@color/line"/>
 
         <Button
             android:id="@+id/bt_become_teacher"
+            android:layout_below="@id/line_ten"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="我是教师，点击验证"
-            android:background="@color/editColor"/>
+            android:textColor="@color/white"
+            android:background="@color/colorPrimaryDark"/>
         <Button
+            android:layout_below="@id/bt_become_teacher"
             android:id="@+id/bt_exit_login"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="退出当前登陆状态"
-            android:background="@color/editColor"/>
-    </LinearLayout>
+            android:textColor="@color/white"
+            android:background="@color/warning"/>
+    </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

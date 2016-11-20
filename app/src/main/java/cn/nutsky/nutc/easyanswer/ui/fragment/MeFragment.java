@@ -25,7 +25,7 @@ import cn.nutsky.nutc.easyanswer.utils.ActivityCollector;
 public class MeFragment extends Fragment implements View.OnClickListener {
 
     private Button btExitLogin;
-    private Button btBeacomeTeacher;
+    private Button btBecomeTeacher;
     private Intent intent;
 
     @Nullable
@@ -39,14 +39,16 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         btExitLogin = (Button) view.findViewById(R.id.bt_exit_login);
-        btBeacomeTeacher = (Button) view.findViewById(R.id.bt_become_teacher);
+        btBecomeTeacher = (Button) view.findViewById(R.id.bt_become_teacher);
         btExitLogin.setOnClickListener(this);
-        btBeacomeTeacher.setOnClickListener(this);
+        btBecomeTeacher.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_my_question:
+                
             case R.id.bt_exit_login:
                 intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
