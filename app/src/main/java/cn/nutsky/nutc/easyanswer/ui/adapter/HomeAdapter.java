@@ -30,12 +30,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home,parent,false));
     }
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvLabel.setText(mQuestions.get(position).getLabel());
         holder.tvContent.setText(mQuestions.get(position).getContent());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //String askS = mQuestions.get(position).getObjectId();
                 Intent intent = new Intent(view.getContext(),QuestionDetailActivity.class);
                 view.getContext().startActivity(intent);
             }

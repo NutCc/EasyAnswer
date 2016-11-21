@@ -10,15 +10,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.SaveCallback;
+
+import java.text.SimpleDateFormat;
+
 import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.config.Const;
 import cn.nutsky.nutc.easyanswer.ui.fragment.OnlineFragment;
 import cn.nutsky.nutc.easyanswer.ui.widget.BackToolbar;
 
 public class CreateClassroomActivity extends AppCompatActivity {
-    Toolbar mToolbar;
-
+    private Toolbar mToolbar;
+    private EditText etContent;
+    private EditText etBeginDate;
+    private EditText etBeginTime;
+    private EditText etEndTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +37,11 @@ public class CreateClassroomActivity extends AppCompatActivity {
         setTitle("创建教室");
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
+
+        etContent = (EditText) findViewById(R.id.et_Content);
+        etBeginDate = (EditText) findViewById(R.id.et_begin_date);
+        etBeginTime = (EditText) findViewById(R.id.et_begin_time);
+        etEndTime = (EditText) findViewById(R.id.et_end_time);
     }
 
     @Override
@@ -40,11 +56,40 @@ public class CreateClassroomActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.toolbar_ok:
-                Toast.makeText(this,"创建成功",Toast.LENGTH_SHORT).show();
-                finish();
+                if(!etContent.getText().toString().isEmpty()) {
+                    putClassroom();
+                    Intent intent = new Intent();
+                    intent.putExtra(Const.CREATE_CLASS_SUCCESS, true);
+                    setResult(RESULT_OK, intent);
+                    Toast.makeText(this, "创建成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else{
+                    Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
         return true;
+    }
+
+    private void putClassroom(){
+        AVObject classroom = new AVObject("Classroom");
+        classroom.put("content", etContent.getText().toString());
+        classroom.put("beginDate", etBeginDate.getText().toString());
+        classroom.put("beginTime", etBeginTime.getText().toString());
+        classroom.put("endTime",etEndTime.getText().toString());
+        classroom.put("name","NutC");
+        classroom.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) {
+                    // 存储成功
+
+                } else {
+                    // 失败的话，请检查网络环境以及 SDK 配置是否正确
+                }
+            }
+        });
     }
 
 }

@@ -13,6 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.FindCallback;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +25,7 @@ import java.util.List;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.data.Classroom;
+import cn.nutsky.nutc.easyanswer.data.Question;
 import cn.nutsky.nutc.easyanswer.ui.adapter.HomeAdapter;
 import cn.nutsky.nutc.easyanswer.ui.adapter.OnlineAdapter;
 
@@ -29,7 +35,7 @@ import cn.nutsky.nutc.easyanswer.ui.adapter.OnlineAdapter;
 
 public class OnlineFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private List<Classroom> mClassroom = new ArrayList<>();
+    private List<Classroom> mClassrooms = new ArrayList<>();
     private OnlineAdapter mOnlineAdapter;
 
     @Nullable
@@ -42,19 +48,33 @@ public class OnlineFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mOnlineAdapter = new OnlineAdapter(mClassroom);
+        mOnlineAdapter = new OnlineAdapter(mClassrooms);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_online);
         mRecyclerView.setAdapter(mOnlineAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         getClassroom();
-
     }
 
     public void getClassroom(){
-        for (int i = 0; i < 10; i++) {
-            mClassroom.add(new Classroom("content","name","2016-01-05"," 14:00","16:00"));
-        }
+        final AVQuery<AVObject> avQuery = new AVQuery<>("Classroom");
+        avQuery.orderByDescending("createdAt");
+        avQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+                    mClassrooms.clear();
+                    for(AVObject object:list)
+                        mClassrooms.add(new Classroom(object));
+                    mOnlineAdapter.notifyDataSetChanged();
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-        mOnlineAdapter.notifyDataSetChanged();
+    public void refresh() {
+        if (mRecyclerView != null && mOnlineAdapter != null)
+            getClassroom();
     }
 }

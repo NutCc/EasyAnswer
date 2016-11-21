@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.avos.avoscloud.AVObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class Question {
     private int replay_num;
     private String label;
     private String createdAt;
-    private String updateAt;
+    private String updatedAt;
 
     public Question(AVObject avObject) {
         if (!avObject.getClassName().equals("Question")) {
@@ -26,6 +27,12 @@ public class Question {
         }
         setObjectId(avObject.getObjectId());
         setContent((String) avObject.get("content"));
+        setName((String) avObject.get("name"));
+        setCommentAsk_num(avObject.getInt("commentAsk_num"));
+        setReplay_num(avObject.getInt("replay_num"));
+        setLabel((String) avObject.get("label"));
+        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("createdAt")));
+        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
     }
 
     public Question( @NonNull String label,@NonNull String content) {
@@ -92,12 +99,12 @@ public class Question {
         this.createdAt = createdAt;
     }
 
-    public String getUpdateAt() {
-        return updateAt;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public AVObject toAVObject() {

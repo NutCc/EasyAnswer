@@ -22,6 +22,8 @@ import java.lang.reflect.Method;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.app.activity.BaseDoubleClickActivity;
+import cn.nutsky.nutc.easyanswer.config.Const;
+import cn.nutsky.nutc.easyanswer.ui.callback.RefreshListener;
 import cn.nutsky.nutc.easyanswer.ui.fragment.HomeFragment;
 import cn.nutsky.nutc.easyanswer.ui.fragment.MeFragment;
 import cn.nutsky.nutc.easyanswer.ui.fragment.OnlineFragment;
@@ -37,6 +39,9 @@ public class MainActivity extends BaseDoubleClickActivity {
     private MeFragment meFragment;
     private OnlineFragment onlineFragment;
     private ImageView mAskButton;
+
+    public static final int REQUEST_ASK = 1;
+    public static final int REQUEST_CREATCLASS = 2;
 
 
     @Override
@@ -66,23 +71,29 @@ public class MainActivity extends BaseDoubleClickActivity {
         mAskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),AskActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(view.getContext(), AskActivity.class);
+                startActivityForResult(intent, REQUEST_ASK);
             }
         });
 
-       /*AVObject questionObject = new AVObject("Question");
-        questionObject.put("label","English");
-        questionObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                if(e == null){
-                    Log.d("saved","success!");
-                }
-            }
-        });*/
-
         selectNavigationItem(1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return;
+
+        switch (requestCode) {
+            case REQUEST_ASK:
+                if (data.getBooleanExtra(Const.ASK_SUCCESS, false))
+                    homeFragment.refresh();
+                break;
+            case REQUEST_CREATCLASS:
+                if(data.getBooleanExtra(Const.CREATE_CLASS_SUCCESS,false))
+                    onlineFragment.refresh();
+        }
     }
 
     @Override
@@ -97,10 +108,10 @@ public class MainActivity extends BaseDoubleClickActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.home_bar_search:
-                Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.toolbar_history:
-                Toast.makeText(this, "bbb", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "历史记录", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;
@@ -121,7 +132,7 @@ public class MainActivity extends BaseDoubleClickActivity {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(MainActivity.this, CreateClassroomActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent,REQUEST_CREATCLASS);
                     }
                 });
                 break;

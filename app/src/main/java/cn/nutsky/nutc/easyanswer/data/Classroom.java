@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.avos.avoscloud.AVObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -24,11 +25,18 @@ public class Classroom {
     private String time;
 
     public Classroom(AVObject avObject) {
-        if (!avObject.getClassName().equals("content")) {
+        if (!avObject.getClassName().equals("Classroom")) {
             throw new RuntimeException("Question constructor params must be AVObject<ClassroomActivity>.");
         }
         setObjectId(avObject.getObjectId());
         setContent((String) avObject.get("content"));
+        setName((String) avObject.get("name"));
+        setClassContent((String) avObject.get("classContent"));
+        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("createdAt")));
+        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
+        setBeginDate((String) avObject.get("beginDate"));
+        setEndTime((String) avObject.get("endTime"));
+        setBeginTime((String) avObject.get("beginTime"));
     }
 
     public Classroom(@NonNull String content,@NonNull String name,@NonNull String beginDate,@NonNull String beginTime,@NonNull String endTime){
@@ -100,22 +108,24 @@ public class Classroom {
         return beginTime;
     }
 
-    public String getTime(){
-        return getBeginDate()+" "+getBeginTime()+" - " + getEndTime();
-    }
-
     public String getBeginDate(){return beginDate;}
 
-    public void setBeginDate(String beginTime){this.beginTime = beginTime;}
+    public void setBeginDate(String beginDate){this.beginDate = beginDate;}
 
     public void setBeginTime(String beginTime) {
         this.beginTime = beginTime;
     }
+
+    public String getTime(){
+        return getBeginDate()+"-"+getBeginTime()+" - " + getEndTime();
+    }
+
     public AVObject toAVObject() {
         AVObject avObject = new AVObject("Classroom");
         avObject.setObjectId(objectId);
         avObject.put("content", content);
-        avObject.put("name",name);
+        avObject.put("name","NutC");
+        avObject.put("beginDate",beginDate);
         avObject.put("beginTime",beginTime);
         avObject.put("endTime",endTime);
         return avObject;

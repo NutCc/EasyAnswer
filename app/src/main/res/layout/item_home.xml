@@ -26,10 +26,10 @@
             android:background="@color/label"
             android:text="hahaha"/>
         <TextView
+            android:id="@+id/tv_content"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
             android:layout_below="@id/tv_label"
-            android:id="@+id/tv_content"
             android:ellipsize="end"
             android:lines="3"
             android:layout_width="wrap_content"
@@ -75,8 +75,5 @@
             android:src="@drawable/ic_chat_black_24dp"
             android:layout_marginRight="6dp"
             android:layout_marginBottom="6dp"/>
-
-
-
     </RelativeLayout>
 </android.support.v7.widget.CardView>
