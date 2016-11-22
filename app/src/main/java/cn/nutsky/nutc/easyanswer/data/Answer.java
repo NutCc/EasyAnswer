@@ -27,8 +27,10 @@ public class Answer {
         setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
     }
 
-    public Answer(String answerContent){
+    public Answer(String answerContent,String objectId,String createdAt){
         this.answerContent = answerContent;
+        this.objectId = objectId;
+        this.createdAt = createdAt;
     }
 
     public String getObjectId() {

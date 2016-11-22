@@ -15,8 +15,8 @@ public class Question {
     private String objectId;
     private String content;
     private String name;
-    private int commentAsk_num;
-    private int replay_num;
+    private int commentAskNum;
+    private int replyNum;
     private String label;
     private String createdAt;
     private String updatedAt;
@@ -28,8 +28,8 @@ public class Question {
         setObjectId(avObject.getObjectId());
         setContent((String) avObject.get("content"));
         setName((String) avObject.get("name"));
-        setCommentAsk_num(avObject.getInt("commentAsk_num"));
-        setReplay_num(avObject.getInt("replay_num"));
+        setCommentAskNum(avObject.getInt("commentAskNum"));
+        setReplyNum(avObject.getInt("replyNum"));
         setLabel((String) avObject.get("label"));
         setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("createdAt")));
         setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
@@ -67,20 +67,20 @@ public class Question {
         this.name = name;
     }
 
-    public int getCommentAsk_num() {
-        return commentAsk_num;
+    public int getCommentAskNum() {
+        return commentAskNum;
     }
 
-    public void setCommentAsk_num(int commentAsk_num) {
-        this.commentAsk_num = commentAsk_num;
+    public void setCommentAskNum(int commentAskNum) {
+        this.commentAskNum = commentAskNum;
     }
 
-    public int getReplay_num() {
-        return replay_num;
+    public int getReplyNum() {
+        return replyNum;
     }
 
-    public void setReplay_num(int replay_num) {
-        this.replay_num = replay_num;
+    public void setReplyNum(int replyNum) {
+        this.replyNum = replyNum;
     }
 
     public String getLabel() {

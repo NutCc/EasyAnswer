@@ -33,11 +33,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.tvLabel.setText(mQuestions.get(position).getLabel());
         holder.tvContent.setText(mQuestions.get(position).getContent());
+        holder.tvReplyNum.setText(mQuestions.get(position).getReplyNum() + "");
+        holder.tvCommentAskNum.setText(mQuestions.get(position).getCommentAskNum() + "");
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String askS = mQuestions.get(position).getObjectId();
                 Intent intent = new Intent(view.getContext(),QuestionDetailActivity.class);
+                intent.putExtra("questionId",mQuestions.get(position).getObjectId());
                 view.getContext().startActivity(intent);
             }
         });
@@ -51,12 +53,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvLabel;
         TextView tvContent;
+        TextView tvReplyNum;
+        TextView tvCommentAskNum;
         private CardView mCardView;
         public ViewHolder(View itemView) {
             super(itemView);
             tvLabel = (TextView) itemView.findViewById(R.id.tv_label);
             mCardView = (CardView) itemView.findViewById(R.id.cv_home);
             tvContent = (TextView) itemView.findViewById(R.id.tv_content);
+            tvReplyNum = (TextView) itemView.findViewById(R.id.tv_answer_num);
+            tvCommentAskNum = (TextView) itemView.findViewById(R.id.tv_same_ask_num);
         }
     }
 }

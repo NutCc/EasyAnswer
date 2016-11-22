@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment implements RefreshListener{
     private RecyclerView mRecyclerView;
     private List<Question> mQuestions = new ArrayList<>();
     private HomeAdapter mHomeAdapter;
+    private TextView tvReplyNum;
+    private TextView tvCommentAskNum;
 
     @Nullable
     @Override
@@ -61,8 +64,9 @@ public class HomeFragment extends Fragment implements RefreshListener{
             public void done(List<AVObject> list, AVException e) {
                 if (e == null) {
                     mQuestions.clear();
-                    for(AVObject object:list)
+                    for(AVObject object:list) {
                         mQuestions.add(new Question(object));
+                    }
                     mHomeAdapter.notifyDataSetChanged();
                 } else {
                     e.printStackTrace();

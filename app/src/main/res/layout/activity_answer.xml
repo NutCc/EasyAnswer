@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_answer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.nutsky.nutc.easyanswer.ui.activity.AnswerActivity">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_back_toolbar" />
+    <EditText
+        android:id="@+id/et_reply_content"
+        android:layout_margin="10dp"
+        android:padding="6dp"
+        android:gravity="top"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/shape_edit"/>
+</RelativeLayout>

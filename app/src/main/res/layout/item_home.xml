@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/cv_home"
+<android.support.v7.widget.CardView android:id="@+id/cv_home"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="148dp"
@@ -10,7 +9,8 @@
     app:cardElevation="2dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,12 +38,12 @@
             android:textSize="16sp"
             android:text="jjjjjjjjjjjiiiii"/>
         <TextView
+            android:id="@+id/tv_same_ask_num"
             android:layout_marginRight="16dp"
             android:layout_alignParentBottom="true"
-            android:id="@+id/tv_same_ask_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12"
+            tools:text="12"
             android:textSize="14dp"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="6dp"/>
@@ -57,13 +57,13 @@
             android:src="@drawable/ic_same_ask_24dp"
             android:layout_marginBottom="6dp"/>
         <TextView
-            android:layout_marginRight="12dp"
             android:id="@+id/tv_answer_num"
+            android:layout_marginRight="12dp"
             android:layout_toLeftOf="@id/iv_same_ask"
             android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12"
+            tools:text="12"
             android:textSize="14dp"
             android:layout_marginBottom="6dp"/>
         <ImageView

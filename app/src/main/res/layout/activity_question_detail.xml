@@ -104,7 +104,7 @@
                         android:text="12"
                         android:layout_marginBottom="6dp"/>
                     <ImageView
-
+                        android:id="@+id/iv_answer_detail"
                         android:layout_alignParentBottom="true"
                         android:layout_toLeftOf="@id/tv_answer_num_detail"
                         android:layout_width="wrap_content"
