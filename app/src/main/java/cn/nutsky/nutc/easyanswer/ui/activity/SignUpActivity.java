@@ -72,9 +72,6 @@ public class SignUpActivity extends BaseActivity {
                 }
                 else{
                     putUser();
-                    Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    ActivityCollector.finishAll();
                 }
             }
         });
@@ -91,7 +88,9 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void done(AVException e) {
                 if (e == null) {
-                    // 注册成功
+                    Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    ActivityCollector.finishAll();
                     Toast.makeText(SignUpActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
                 } else {
                     // 失败的原因可能有多种，常见的是用户名已经存在。

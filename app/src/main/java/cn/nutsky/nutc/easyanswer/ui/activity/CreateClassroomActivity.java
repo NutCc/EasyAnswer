@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 
 import java.text.SimpleDateFormat;
@@ -58,11 +59,6 @@ public class CreateClassroomActivity extends AppCompatActivity {
             case R.id.toolbar_ok:
                 if(!etContent.getText().toString().isEmpty()) {
                     putClassroom();
-                    Intent intent = new Intent();
-                    intent.putExtra(Const.CREATE_CLASS_SUCCESS, true);
-                    setResult(RESULT_OK, intent);
-                    Toast.makeText(this, "创建成功", Toast.LENGTH_SHORT).show();
-                    finish();
                 }
                 else{
                     Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
@@ -78,15 +74,18 @@ public class CreateClassroomActivity extends AppCompatActivity {
         classroom.put("beginDate", etBeginDate.getText().toString());
         classroom.put("beginTime", etBeginTime.getText().toString());
         classroom.put("endTime",etEndTime.getText().toString());
-        classroom.put("name","NutC");
+        classroom.put("name", AVUser.getCurrentUser().getUsername());
         classroom.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
                 if (e == null) {
-                    // 存储成功
-
+                    Intent intent = new Intent();
+                    intent.putExtra(Const.CREATE_CLASS_SUCCESS, true);
+                    setResult(RESULT_OK, intent);
+                    Toast.makeText(CreateClassroomActivity.this, "创建成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
-                    // 失败的话，请检查网络环境以及 SDK 配置是否正确
+                    Toast.makeText(CreateClassroomActivity.this, "您的网络太渣了", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -1,35 +1,50 @@
 package cn.nutsky.nutc.easyanswer.data;
 
+import com.avos.avoscloud.AVObject;
+
+import java.text.SimpleDateFormat;
+
 /**
  * Created by NutC on 2016/11/18.
  */
 
 public class Answer {
-    private String objectID;
-    private String questionID;
+    private String objectId;
+    private String questionId;
     private String name;
     private String answerContent;
     private String createdAt;
     private String updatedAt;
+    public Answer(AVObject avObject) {
+        if (!avObject.getClassName().equals("Answer")) {
+            throw new RuntimeException("Question constructor params must be AVObject<Question>.");
+        }
+        setObjectId(avObject.getObjectId());
+        setQuestionId((String) avObject.get("questionId"));
+        setName((String) avObject.get("name"));
+        setAnswerContent((String) avObject.get("answerContent"));
+        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("createdAt")));
+        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
+    }
 
     public Answer(String answerContent){
         this.answerContent = answerContent;
     }
 
-    public String getObjectID() {
-        return objectID;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setObjectID(String objectID) {
-        this.objectID = objectID;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
-    public String getQuestionID() {
-        return questionID;
+    public String getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestionID(String questionID) {
-        this.questionID = questionID;
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
     }
 
     public String getName() {
