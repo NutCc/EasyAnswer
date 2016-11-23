@@ -4,17 +4,50 @@
     android:id="@+id/activity_classroom"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#e0dede"
     tools:context="cn.nutsky.nutc.easyanswer.ui.activity.ClassroomActivity">
     <include
     android:id="@+id/toolbar"
     layout="@layout/include_back_toolbar" />
+    <LinearLayout
+        android:id="@+id/edit_and_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:layout_alignParentBottom="true">
+        <EditText
+            android:id="@+id/et_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shape_chat_edit"
+            android:hint="请输入内容"
+            android:textSize="18sp"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_gravity="right"
+            android:padding="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textSize="18sp"
+            android:layout_marginLeft="6dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_classroom"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/edit_and_send">
     </android.support.v7.widget.RecyclerView>
+
 
 
 </RelativeLayout>

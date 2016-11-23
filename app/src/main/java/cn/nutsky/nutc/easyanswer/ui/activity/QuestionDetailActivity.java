@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.LogUtil;
 
@@ -27,10 +28,12 @@ import java.util.Date;
 import java.util.List;
 
 import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.app.activity.BaseActivity;
 import cn.nutsky.nutc.easyanswer.data.Answer;
+import cn.nutsky.nutc.easyanswer.data.Classroom;
 import cn.nutsky.nutc.easyanswer.ui.adapter.QuestionDetailAdapter;
 
-public class QuestionDetailActivity extends AppCompatActivity {
+public class QuestionDetailActivity extends BaseActivity {
     private TextView tvName;
     private TextView tvQuestionTime;
     private TextView tvQuestionDetail;
@@ -74,6 +77,7 @@ public class QuestionDetailActivity extends AppCompatActivity {
         questionId = getIntent().getStringExtra("questionId");
         Log.d("d1",questionId);
         getQuestionDetail();
+        getAnswer();
         setClick();
     }
 
@@ -135,5 +139,23 @@ public class QuestionDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void getAnswer(){
+        final AVQuery<AVObject> avQuery = new AVQuery<>("Answer");
+        avQuery.whereEqualTo("questionId",questionId);
+        avQuery.orderByDescending("createdAt");
+        avQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+                    mAnswers.clear();
+                    for(AVObject object:list)
+                        mAnswers.add(new Answer(object));
+                    mQuestionDetailAdapter.notifyDataSetChanged();
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
 }

@@ -10,6 +10,15 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
+
+import java.lang.reflect.Array;
+
+import javax.security.auth.SubjectDomainCombiner;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.app.activity.BaseDoubleClickActivity;
@@ -23,6 +32,7 @@ public class LoginActivity extends BaseDoubleClickActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         button_login = (Button) findViewById(R.id.bt_login);
         etName = (EditText) findViewById(R.id.et_name);
@@ -48,6 +58,7 @@ public class LoginActivity extends BaseDoubleClickActivity {
             }
         });
     }
+
 
     private void login(){
         AVUser.logInInBackground(etName.getText().toString(), etPassword.getText().toString(), new LogInCallback<AVUser>() {

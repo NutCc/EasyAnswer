@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.app.activity.BaseActivity;
 
-public class MyQuestionActivity extends AppCompatActivity {
+public class MyQuestionActivity extends BaseActivity {
     Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

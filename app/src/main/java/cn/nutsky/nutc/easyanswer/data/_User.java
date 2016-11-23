@@ -1,6 +1,7 @@
 package cn.nutsky.nutc.easyanswer.data;
 
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
 
 import java.text.SimpleDateFormat;
 
@@ -24,22 +25,22 @@ public class _User {
     private String createdAt;
     private String updatedAt;
 
-    public _User(AVObject avObject) {
-        if (!avObject.getClassName().equals("_User")) {
+    public _User(AVUser avUser) {
+        if (!avUser.getClassName().equals("_User")) {
             throw new RuntimeException("_User constructor params must be AVObject<_User>.");
         }
-        setObjectId(avObject.getObjectId());
-        setRealName((String) avObject.get("realName"));
-        setSex((String) avObject.get("sex"));
-        setPassword((String) avObject.get("password"));
-        setName((String) avObject.get("name"));
-        setPortrait((String) avObject.get("portrait"));
-        setTeacher(avObject.getBoolean("teacher"));
-        setMobilePhoneNumber((String) avObject.get("mobilePhoneNumber"));
-        setClassId(avObject.getInt("classId"));
-        setStudentId((String) avObject.get("studentId"));
-        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("createdAt")));
-        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
+        setObjectId(avUser.getObjectId());
+        setRealName((String) avUser.get("realName"));
+        setSex((String) avUser.get("sex"));
+        setPassword((String) avUser.get("password"));
+        setName((String) avUser.get("name"));
+        setPortrait((String) avUser.get("portrait"));
+        setTeacher(avUser.getBoolean("teacher"));
+        setMobilePhoneNumber((String) avUser.get("mobilePhoneNumber"));
+        setClassId(avUser.getInt("classId"));
+        setStudentId((String) avUser.get("studentId"));
+        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avUser.get("createdAt")));
+        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avUser.get("updatedAt")));
     }
 
     public String getObjectId() {

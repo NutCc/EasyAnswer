@@ -16,9 +16,10 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 
 import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.app.activity.BaseActivity;
 import cn.nutsky.nutc.easyanswer.config.Const;
 
-public class AskActivity extends AppCompatActivity {
+public class AskActivity extends BaseActivity {
     private Toolbar mToolbar;
     private EditText edLabel;
     private EditText edContent;

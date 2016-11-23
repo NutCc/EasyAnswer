@@ -23,8 +23,8 @@ public class Answer {
         setQuestionId((String) avObject.get("questionId"));
         setName((String) avObject.get("name"));
         setAnswerContent((String) avObject.get("answerContent"));
-        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("createdAt")));
-        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd").format(avObject.get("updatedAt")));
+        setCreatedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(avObject.get("createdAt")));
+        setUpdatedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(avObject.get("updatedAt")));
     }
 
     public Answer(String answerContent,String objectId,String createdAt){

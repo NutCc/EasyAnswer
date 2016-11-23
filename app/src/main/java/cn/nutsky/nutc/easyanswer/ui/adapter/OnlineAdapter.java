@@ -30,7 +30,7 @@ public class OnlineAdapter extends RecyclerView.Adapter<OnlineAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.textViewName.setText(mClassrooms.get(position).getName());
         holder.textViewQuestionBrief.setText(mClassrooms.get(position).getContent());
         holder.textViewTime.setText(mClassrooms.get(position).getTime());
@@ -38,6 +38,7 @@ public class OnlineAdapter extends RecyclerView.Adapter<OnlineAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ClassroomActivity.class);
+                intent.putExtra("classroomId",mClassrooms.get(position).getObjectId());
                 view.getContext().startActivity(intent);
             }
         });

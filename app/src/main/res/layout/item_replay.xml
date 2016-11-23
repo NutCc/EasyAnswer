@@ -4,12 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_edit"
-    android:layout_marginTop="8dp"
     android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:padding="10dp">
+    android:layout_marginRight="8dp">
     <TextView
         android:id="@+id/tv_name"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="6dp"
@@ -21,11 +20,14 @@
         android:id="@+id/tv_reply_time"
         android:layout_toRightOf="@id/tv_name"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2016-11-22" />
     <TextView
         android:id="@+id/tv_reply_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

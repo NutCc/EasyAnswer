@@ -17,15 +17,22 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 
 import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.app.activity.BaseActivity;
 import cn.nutsky.nutc.easyanswer.config.Const;
 import cn.nutsky.nutc.easyanswer.ui.fragment.OnlineFragment;
 import cn.nutsky.nutc.easyanswer.ui.widget.BackToolbar;
 
-public class CreateClassroomActivity extends AppCompatActivity {
+public class CreateClassroomActivity extends BaseActivity {
     private Toolbar mToolbar;
     private EditText etContent;
     private EditText etBeginDate;
@@ -90,5 +97,27 @@ public class CreateClassroomActivity extends AppCompatActivity {
             }
         });
     }
+    private void creatClassroom(){
+        /*AVIMClient tom = AVIMClient.getInstance("Tom");
+        tom.open(new AVIMClientCallback(){
+
+            @Override
+            public void done(AVIMClient client,AVIMException e){
+                if(e==null){
+                    //登录成功
+                    //创建一个 名为 "HelloKitty PK 加菲猫" 的暂态对话
+                    client.createConversation(Collections.emptyList(),"HelloKitty PK 加菲猫",null,true,
+                            new AVIMConversationCreatedCallback(){
+                                @Override
+                                public void done(AVIMConversation conv, AVIMException e){
+
+                                }
+                            });
+                }
+            }
+        });*/
+
+    }
+
 
 }
