@@ -49,6 +49,8 @@ public class QuestionDetailActivity extends BaseActivity {
     private Toolbar mToolbar;
     private static String questionId;
 
+    public final int ANSWER = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,20 @@ public class QuestionDetailActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return;
+
+        switch (requestCode) {
+            case ANSWER:
+                if (data.getBooleanExtra("ANSWER_SUCCESS", false))
+                    getAnswer();
+                break;
+        }
+    }
     private void setClick(){
         ivCollection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,8 +142,7 @@ public class QuestionDetailActivity extends BaseActivity {
                 //TODO 值加1
                 Intent intent = new Intent(view.getContext(),AnswerActivity.class);
                 intent.putExtra("questionId",questionId);
-                Log.d("d2",questionId);
-                startActivity(intent);
+                startActivityForResult(intent,ANSWER);
             }
         });
         ivSameAsk.setOnClickListener(new View.OnClickListener() {

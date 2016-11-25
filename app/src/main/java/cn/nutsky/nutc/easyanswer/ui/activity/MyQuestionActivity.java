@@ -18,4 +18,6 @@ public class MyQuestionActivity extends BaseActivity {
         setTitle("我的问题");
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
     }
+
+
 }

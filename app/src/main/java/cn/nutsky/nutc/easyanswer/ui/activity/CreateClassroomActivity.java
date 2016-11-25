@@ -24,11 +24,14 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.app.activity.BaseActivity;
 import cn.nutsky.nutc.easyanswer.config.Const;
+import cn.nutsky.nutc.easyanswer.data._Conversation;
+import cn.nutsky.nutc.easyanswer.data._User;
 import cn.nutsky.nutc.easyanswer.ui.fragment.OnlineFragment;
 import cn.nutsky.nutc.easyanswer.ui.widget.BackToolbar;
 
@@ -65,7 +68,7 @@ public class CreateClassroomActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.toolbar_ok:
                 if(!etContent.getText().toString().isEmpty()) {
-                    putClassroom();
+                    createClassroom();
                 }
                 else{
                     Toast.makeText(this, "内容不能为空", Toast.LENGTH_SHORT).show();
@@ -97,27 +100,33 @@ public class CreateClassroomActivity extends BaseActivity {
             }
         });
     }
-    private void creatClassroom(){
-        /*AVIMClient tom = AVIMClient.getInstance("Tom");
-        tom.open(new AVIMClientCallback(){
 
+    private void createClassroom() {
+        AVUser currentUser = AVUser.getCurrentUser();
+
+        AVIMClient avimClient = AVIMClient.getInstance(currentUser.getObjectId());
+
+        avimClient.open(new AVIMClientCallback() {
             @Override
-            public void done(AVIMClient client,AVIMException e){
-                if(e==null){
-                    //登录成功
-                    //创建一个 名为 "HelloKitty PK 加菲猫" 的暂态对话
-                    client.createConversation(Collections.emptyList(),"HelloKitty PK 加菲猫",null,true,
-                            new AVIMConversationCreatedCallback(){
+            public void done(AVIMClient client,AVIMException e) {
+                if(e == null) {
+                    client.createConversation(new ArrayList<String>(),
+                            etContent.getText().toString(),
+                            null,
+                            true,
+                            new AVIMConversationCreatedCallback() {
                                 @Override
                                 public void done(AVIMConversation conv, AVIMException e){
-
+                                    Toast.makeText(CreateClassroomActivity.this, "房间名为：" + conv.getName(), Toast.LENGTH_SHORT).show();
+                                    finish();
                                 }
                             });
+                } else {
+                    Toast.makeText(CreateClassroomActivity.this, "我都说不出话来了，居然创建失败了", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
-        });*/
-
+        });
     }
-
 
 }

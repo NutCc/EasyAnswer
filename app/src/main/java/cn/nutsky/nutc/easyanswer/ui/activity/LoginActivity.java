@@ -2,13 +2,17 @@ package cn.nutsky.nutc.easyanswer.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
@@ -17,11 +21,14 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 import javax.security.auth.SubjectDomainCombiner;
 
 import cn.nutsky.nutc.easyanswer.R;
+import cn.nutsky.nutc.easyanswer.app.App;
 import cn.nutsky.nutc.easyanswer.app.activity.BaseDoubleClickActivity;
+import cn.nutsky.nutc.easyanswer.data.Answer;
 
 public class LoginActivity extends BaseDoubleClickActivity {
     private Button button_login,button_sign_up;
@@ -67,6 +74,22 @@ public class LoginActivity extends BaseDoubleClickActivity {
                 if (e == null) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+
+                    final AVQuery<AVObject> avQuery = new AVQuery<>("_User");
+                    avQuery.whereEqualTo("objectId", avUser.getObjectId());
+
+                    avQuery.findInBackground(new FindCallback<AVObject>() {
+                        @Override
+                        public void done(List<AVObject> list, AVException e) {
+                            if (e == null) {
+                                App.isTeacher = list.get(0).getBoolean("teacher");
+                                Log.d("TAG", App.isTeacher + "");
+                            } else {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                     finish();
                 }
                 else {

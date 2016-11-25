@@ -12,6 +12,8 @@ import cn.nutsky.nutc.easyanswer.config.Api;
 
 public class App extends Application {
 
+    public static boolean isTeacher = false;
+
     @Override
     public void onCreate() {
         super.onCreate();

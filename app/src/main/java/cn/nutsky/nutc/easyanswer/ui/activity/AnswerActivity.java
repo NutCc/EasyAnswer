@@ -66,6 +66,9 @@ public class AnswerActivity extends BaseActivity {
             public void done(AVException e) {
                 if (e == null) {
                     Toast.makeText(AnswerActivity.this, "回答成功", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.putExtra("ANSWER_SUCCESS",true);
+                    setResult(RESULT_OK,intent);
                     finish();
                 } else {
                     Toast.makeText(AnswerActivity.this, "您的网络太渣了", Toast.LENGTH_SHORT).show();
