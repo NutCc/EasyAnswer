@@ -7,15 +7,26 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.AVIMConversationEventHandler;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.AVIMMessageManager;
+import com.avos.avoscloud.im.v2.AVIMTypedMessageHandler;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
+import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +38,8 @@ import cn.nutsky.nutc.easyanswer.data.ClassChat;
 import cn.nutsky.nutc.easyanswer.data.Classroom;
 import cn.nutsky.nutc.easyanswer.ui.adapter.ClassroomAdapter;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
 public class ClassroomActivity extends BaseActivity {
     private List<ClassChat> mClassChats = new ArrayList<>();
     private ClassroomAdapter mClassroomAdapter;
@@ -34,6 +47,10 @@ public class ClassroomActivity extends BaseActivity {
     private Toolbar mToolbar;
     private EditText etEdit;
     private TextView tvSend;
+    private AVIMClient user;
+    private AVIMConversation conversation;
+    private CustomMessageHandler messageHandler;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +63,15 @@ public class ClassroomActivity extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_classroom);
         mRecyclerView.setAdapter(mClassroomAdapter = new ClassroomAdapter(mClassChats));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        mClassroomAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                mRecyclerView.smoothScrollToPosition(mClassroomAdapter.getItemCount() - 1);
+            }
+        });
+
 
         etEdit = (EditText) findViewById(R.id.et_edit);
         tvSend = (TextView) findViewById(R.id.tv_send);
@@ -54,6 +80,8 @@ public class ClassroomActivity extends BaseActivity {
             public void onClick(View view) {
                 if(!etEdit.getText().toString().isEmpty()){
                     putClassChat();
+                    mClassChats.add(new ClassChat(etEdit.getText().toString()));
+                    mClassroomAdapter.notifyDataSetChanged();
                     etEdit.setText("");
                 }
                 else{
@@ -61,33 +89,93 @@ public class ClassroomActivity extends BaseActivity {
                 }
             }
         });
-
-        getClassChat();
+        AVIMMessageManager.setConversationEventHandler(new CustomConversationEventHandler());
+        joinClassroom();
     }
 
-    private void getClassChat() {
-
-        for (int i = 0; i < 10; i++) {
-            mClassChats.add(new ClassChat("aaa"));
-        }
-        mClassroomAdapter.notifyDataSetChanged();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (messageHandler != null)
+            AVIMMessageManager.unregisterMessageHandler(AVIMTextMessage.class,messageHandler);
     }
 
-    private void putClassChat(){
-        AVObject classChat = new AVObject("ClassChat");
-        classChat.put("classroomId",getIntent().getStringExtra("classroomId"));
-        classChat.put("content", etEdit.getText().toString());
-        classChat.put("userId", AVUser.getCurrentUser().getObjectId());
-        classChat.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(AVException e) {
-                    if (e == null) {
+    private void joinClassroom(){
+        user = AVIMClient.getInstance(AVUser.getCurrentUser().getObjectId());
+        user.open(new AVIMClientCallback(){
 
-                    } else {
-                        Toast.makeText(ClassroomActivity.this, "您的网络太渣了", Toast.LENGTH_SHORT).show();
-                    }
+            @Override
+            public void done(AVIMClient client,AVIMException e){
+                if(e==null){
+                    conversation = client.getConversation(getIntent().getStringExtra("classroomId"));
+                    conversation.join(new AVIMConversationCallback(){
+                        @Override
+                        public void done(AVIMException e){
+                            if(e==null){
+                                Log.d("join","success");
+                                AVIMMessageManager.registerMessageHandler(AVIMTextMessage.class,messageHandler = new CustomMessageHandler());
+                            }
+                        }
+                    });
                 }
+            }
         });
+    }
+    private void putClassChat(){
+        if (conversation != null) {
+            AVIMTextMessage msg = new AVIMTextMessage();
+            msg.setText(etEdit.getText().toString());  //发送消息
+            conversation.sendMessage(msg, new AVIMConversationCallback() {
+
+                @Override
+                public void done(AVIMException e) {
+                    Log.d("send","success");
+                }
+            });
+        }
+    }
+
+    public class CustomMessageHandler extends AVIMTypedMessageHandler<AVIMTextMessage>  {
+
+
+        @Override
+        public void onMessage(AVIMTextMessage msg,AVIMConversation conv, AVIMClient client){
+            Log.d("Tom & Jerry",msg.getText());
+            mClassChats.add(new ClassChat(msg.getText()));
+            mClassroomAdapter.notifyDataSetChanged();
+        }
+
+        public void onMessageReceipt(AVIMTextMessage msg,AVIMConversation conv,AVIMClient client){
+
+        }
+    }
+
+    public class CustomConversationEventHandler extends AVIMConversationEventHandler {
+
+        @Override
+        public void onMemberLeft(AVIMClient client, AVIMConversation conversation, List<String> members,
+                                 String kickedBy) {
+
+        }
+
+        @Override
+        public void onMemberJoined(AVIMClient client, AVIMConversation conversation,
+                                   List<String> members, String invitedBy) {
+            // 手机屏幕上会显示一小段文字：Tom 加入到 551260efe4b01608686c3e0f ；操作者为：Tom
+            Toast.makeText(AVOSCloud.applicationContext,
+                    members + "加入到" + conversation.getConversationId() + "；操作者为： "
+                            + invitedBy, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onKicked(AVIMClient client, AVIMConversation conversation, String kickedBy) {
+            // 当前 ClientId(Bob) 被踢出对话，执行此处逻辑
+        }
+
+        @Override
+        public void onInvited(AVIMClient client, AVIMConversation conversation, String invitedBy) {
+            // 当前 ClientId(Bob) 被邀请到对话，执行此处逻辑
+        }
     }
 
 }

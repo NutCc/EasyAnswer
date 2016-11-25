@@ -78,6 +78,40 @@ public class CreateClassroomActivity extends BaseActivity {
         return true;
     }
 
+//---------------创建教室---------------------------------//
+    private void createClassroom() {
+        AVUser currentUser = AVUser.getCurrentUser();
+
+        AVIMClient avimClient = AVIMClient.getInstance(currentUser.getObjectId());
+
+        avimClient.open(new AVIMClientCallback() {
+            @Override
+            public void done(AVIMClient client,AVIMException e) {
+                if(e == null) {
+                    client.createConversation(new ArrayList<String>(),
+                            etContent.getText().toString(),
+                            null,
+                            true,
+                            new AVIMConversationCreatedCallback() {
+                                @Override
+                                public void done(AVIMConversation conv, AVIMException e){
+                                    Intent intent = new Intent();
+                                    intent.putExtra(Const.CREATE_CLASS_SUCCESS, true);
+                                    setResult(RESULT_OK, intent);
+                                    Toast.makeText(CreateClassroomActivity.this, "创建成功", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
+                } else {
+                    Toast.makeText(CreateClassroomActivity.this, "我都说不出话来了，居然创建失败了", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+//---------------我自己的教室-----------------------------------------//
     private void putClassroom(){
         AVObject classroom = new AVObject("Classroom");
         classroom.put("content", etContent.getText().toString());
@@ -100,33 +134,6 @@ public class CreateClassroomActivity extends BaseActivity {
             }
         });
     }
-
-    private void createClassroom() {
-        AVUser currentUser = AVUser.getCurrentUser();
-
-        AVIMClient avimClient = AVIMClient.getInstance(currentUser.getObjectId());
-
-        avimClient.open(new AVIMClientCallback() {
-            @Override
-            public void done(AVIMClient client,AVIMException e) {
-                if(e == null) {
-                    client.createConversation(new ArrayList<String>(),
-                            etContent.getText().toString(),
-                            null,
-                            true,
-                            new AVIMConversationCreatedCallback() {
-                                @Override
-                                public void done(AVIMConversation conv, AVIMException e){
-                                    Toast.makeText(CreateClassroomActivity.this, "房间名为：" + conv.getName(), Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            });
-                } else {
-                    Toast.makeText(CreateClassroomActivity.this, "我都说不出话来了，居然创建失败了", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    //-----------------------------------------------------------------//
 
 }

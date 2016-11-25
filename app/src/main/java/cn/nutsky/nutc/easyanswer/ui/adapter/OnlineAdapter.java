@@ -2,15 +2,25 @@ package cn.nutsky.nutc.easyanswer.ui.adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.GetCallback;
+
 import java.util.List;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.data.Classroom;
+import cn.nutsky.nutc.easyanswer.data._Conversation;
+import cn.nutsky.nutc.easyanswer.data._User;
 import cn.nutsky.nutc.easyanswer.ui.activity.ClassroomActivity;
 
 /**
@@ -18,10 +28,10 @@ import cn.nutsky.nutc.easyanswer.ui.activity.ClassroomActivity;
  */
 
 public class OnlineAdapter extends RecyclerView.Adapter<OnlineAdapter.ViewHolder> {
-    private List<Classroom> mClassrooms;
+    private List<_Conversation> mConversations;
 
-    public OnlineAdapter(List<Classroom> classrooms){
-        mClassrooms = classrooms;
+    public OnlineAdapter(List<_Conversation> conversations){
+        mConversations = conversations;
     }
 
     @Override
@@ -31,22 +41,39 @@ public class OnlineAdapter extends RecyclerView.Adapter<OnlineAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.textViewName.setText(mClassrooms.get(position).getName());
-        holder.textViewQuestionBrief.setText(mClassrooms.get(position).getContent());
-        holder.textViewTime.setText(mClassrooms.get(position).getTime());
+        holder.textViewQuestionBrief.setText(mConversations.get(position).getName());
+        holder.textViewTime.setText(mConversations.get(position).getCreatedAt());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ClassroomActivity.class);
-                intent.putExtra("classroomId",mClassrooms.get(position).getObjectId());
+                intent.putExtra("classroomId",mConversations.get(position).getObjectId());
+                intent.putExtra("classroomName",mConversations.get(position).getName());
                 view.getContext().startActivity(intent);
             }
         });
+        getUserName(holder,position);
     }
 
+    public void getUserName(final ViewHolder holder,final int position){
+        AVQuery<AVUser> userQuery = new AVQuery<>("_User");
+        userQuery.whereEqualTo("objectId",mConversations.get(position).getClientId());
+        Log.d("clientId",mConversations.get(position).getClientId());
+        userQuery.findInBackground(new FindCallback<AVUser>() {
+            @Override
+            public void done(List<AVUser> list, AVException e) {
+                if (e != null){
+                    e.printStackTrace();
+                    return;
+                }
+                holder.textViewName.setText(list.get(0).getUsername());
+            }
+        });
+
+    }
     @Override
     public int getItemCount() {
-        return mClassrooms.size();
+        return mConversations.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

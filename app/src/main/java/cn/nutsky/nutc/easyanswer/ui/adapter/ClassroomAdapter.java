@@ -1,6 +1,7 @@
 package cn.nutsky.nutc.easyanswer.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(getUserTeachear()){
+        if(getUserTeachear().equals("moiling")){
             holder.tvChatLeft.setText(mClassChat.get(position).getContent());
             holder.tvChatRight.setVisibility(View.GONE);
             holder.tvChatLeft.setVisibility(View.VISIBLE);
@@ -68,8 +69,10 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
         }
     }
 
-    private boolean getUserTeachear(){
-        return new _User(AVUser.getCurrentUser()).getTeacher();
+    private String getUserTeachear(){
+        String s = AVUser.getCurrentUser().getUsername();
+        Log.d("isisis",s+"123");
+        return s;
     }
 }
 

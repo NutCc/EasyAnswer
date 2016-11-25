@@ -28,7 +28,6 @@ public class _Conversation {
     public _Conversation(AVIMConversation avimConversation){
         setObjectId(avimConversation.getConversationId());
         setM(avimConversation.getMembers());
-        setLm(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(avimConversation.getLastMessageAt()));
         setName(avimConversation.getName());
         setMu((List<String>) avimConversation.get("mu"));
         setClientId(avimConversation.getCreator());
@@ -68,13 +67,6 @@ public class _Conversation {
         this.tr = tr;
     }
 
-    public String getLm() {
-        return lm;
-    }
-
-    public void setLm(String lm) {
-        this.lm = lm;
-    }
 
     public String getUniqueId() {
         return uniqueId;

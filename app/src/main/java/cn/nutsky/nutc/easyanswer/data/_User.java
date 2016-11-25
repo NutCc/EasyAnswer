@@ -24,6 +24,9 @@ public class _User {
     private String studentId;
     private String createdAt;
     private String updatedAt;
+    private String salt;
+
+
 
     public _User(AVUser avUser) {
         if (!avUser.getClassName().equals("_User")) {
@@ -153,5 +156,12 @@ public class _User {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

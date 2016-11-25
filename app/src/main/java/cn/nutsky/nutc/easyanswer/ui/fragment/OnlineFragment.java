@@ -22,8 +22,10 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.AVIMConversationQuery;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMConversationMemberCountCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationQueryCallback;
 
 import java.text.SimpleDateFormat;
@@ -34,16 +36,19 @@ import java.util.List;
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.data.Classroom;
 import cn.nutsky.nutc.easyanswer.data.Question;
+import cn.nutsky.nutc.easyanswer.data._Conversation;
+import cn.nutsky.nutc.easyanswer.ui.activity.MainActivity;
 import cn.nutsky.nutc.easyanswer.ui.adapter.HomeAdapter;
 import cn.nutsky.nutc.easyanswer.ui.adapter.OnlineAdapter;
+import cn.nutsky.nutc.easyanswer.ui.callback.RefreshListener;
 
 /**
  * Created by NutC on 2016/11/2.
  */
 
-public class OnlineFragment extends Fragment {
+public class OnlineFragment extends Fragment implements RefreshListener{
     private RecyclerView mRecyclerView;
-    private List<Classroom> mClassrooms = new ArrayList<>();
+    private List<_Conversation> mConversations = new ArrayList<>();
     private OnlineAdapter mOnlineAdapter;
 
     @Nullable
@@ -56,11 +61,12 @@ public class OnlineFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mOnlineAdapter = new OnlineAdapter(mClassrooms);
+        mOnlineAdapter = new OnlineAdapter(mConversations);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_online);
         mRecyclerView.setAdapter(mOnlineAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         getClassroom();
+
     }
 
     private void getClassroom(){
@@ -74,8 +80,9 @@ public class OnlineFragment extends Fragment {
                     Toast.makeText(getContext(), "我去，又出错了", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                avimClient.getQuery().findInBackground(new AVIMConversationQueryCallback() {
+                AVIMConversationQuery query = avimClient.getQuery();
+                query.whereEqualTo("tr",true);
+                query.findInBackground(new AVIMConversationQueryCallback() {
                     @Override
                     public void done(List<AVIMConversation> list, AVIMException e) {
                         if (e != null) {
@@ -87,9 +94,13 @@ public class OnlineFragment extends Fragment {
                             Toast.makeText(getContext(), "我去，没有？！", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        for (AVIMConversation conversation : list) {
-                            Log.d("Conversation name -> ", conversation.getName());
+                        else{
+                            mConversations.clear();
+                            for (AVIMConversation conversation : list) {
+                                mConversations.add(new _Conversation(conversation));
+                            }
                         }
+                        mOnlineAdapter.notifyDataSetChanged();
                     }
                 });
 
@@ -97,21 +108,7 @@ public class OnlineFragment extends Fragment {
         });
 
 
-        final AVQuery<AVObject> avQuery = new AVQuery<>("Classroom");
-        avQuery.orderByDescending("createdAt");
-        avQuery.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e == null) {
-                    mClassrooms.clear();
-                    for(AVObject object:list)
-                        mClassrooms.add(new Classroom(object));
-                    mOnlineAdapter.notifyDataSetChanged();
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
+
     }
 
     public void refresh() {
