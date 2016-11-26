@@ -97,10 +97,12 @@ public class OnlineFragment extends Fragment implements RefreshListener{
                         else{
                             mConversations.clear();
                             for (AVIMConversation conversation : list) {
+                                Log.d("add","new");
                                 mConversations.add(new _Conversation(conversation));
                             }
+                            mOnlineAdapter.notifyDataSetChanged();
                         }
-                        mOnlineAdapter.notifyDataSetChanged();
+
                     }
                 });
 

@@ -80,7 +80,7 @@ public class ClassroomActivity extends BaseActivity {
             public void onClick(View view) {
                 if(!etEdit.getText().toString().isEmpty()){
                     putClassChat();
-                    mClassChats.add(new ClassChat(etEdit.getText().toString()));
+                    mClassChats.add(new ClassChat(etEdit.getText().toString(), true));
                     mClassroomAdapter.notifyDataSetChanged();
                     etEdit.setText("");
                 }
@@ -141,7 +141,7 @@ public class ClassroomActivity extends BaseActivity {
         @Override
         public void onMessage(AVIMTextMessage msg,AVIMConversation conv, AVIMClient client){
             Log.d("Tom & Jerry",msg.getText());
-            mClassChats.add(new ClassChat(msg.getText()));
+            mClassChats.add(new ClassChat(msg.getText(), false));
             mClassroomAdapter.notifyDataSetChanged();
         }
 

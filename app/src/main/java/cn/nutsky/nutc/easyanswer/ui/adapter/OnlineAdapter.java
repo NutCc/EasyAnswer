@@ -41,14 +41,15 @@ public class OnlineAdapter extends RecyclerView.Adapter<OnlineAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.textViewQuestionBrief.setText(mConversations.get(position).getName());
+        final String[] a = new String[]{"高等数学集中答疑", "线性代数集中答疑", "编译原理集中答疑", "操作系统集中答疑", "数据结构集中答疑", "数据库集中答疑"};
+        holder.textViewQuestionBrief.setText(a[position]);
         holder.textViewTime.setText(mConversations.get(position).getCreatedAt());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ClassroomActivity.class);
                 intent.putExtra("classroomId",mConversations.get(position).getObjectId());
-                intent.putExtra("classroomName",mConversations.get(position).getName());
+                intent.putExtra("classroomName",a[position]);
                 view.getContext().startActivity(intent);
             }
         });
@@ -66,7 +67,8 @@ public class OnlineAdapter extends RecyclerView.Adapter<OnlineAdapter.ViewHolder
                     e.printStackTrace();
                     return;
                 }
-                holder.textViewName.setText(list.get(0).getUsername());
+                holder.textViewName.setText("Teacher");
+               /* holder.textViewName.setText(list.get(0).getUsername());*/
             }
         });
 

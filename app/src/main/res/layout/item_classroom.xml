@@ -4,10 +4,15 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp">
-
-
+    <ImageView
+        android:layout_marginTop="4dp"
+        android:id="@+id/iv_icon_left"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ccc"/>
     <TextView
         android:id="@+id/tv_classroom_chat_left"
+        android:layout_toRightOf="@id/iv_icon_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -15,6 +20,12 @@
         android:textColor="@color/white"
         android:background="@drawable/classroom_left_chat" />
 
+    <ImageView
+        android:id="@+id/iv_icon_right"
+        android:layout_alignParentRight="true"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/bb"/>
     <TextView
         android:id="@+id/tv_classroom_chat_right"
         android:layout_width="wrap_content"
@@ -22,6 +33,7 @@
         android:textSize="16sp"
         tools:text="我是学生，我要提问"
         android:background="@drawable/classroom_chat_white"
-        android:layout_alignParentRight="true" />
+        android:layout_toLeftOf="@id/iv_icon_right" />
+
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
@@ -41,15 +42,20 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if(getUserTeachear().equals("moiling")){
+        if(!mClassChat.get(position).isMe){
             holder.tvChatLeft.setText(mClassChat.get(position).getContent());
             holder.tvChatRight.setVisibility(View.GONE);
             holder.tvChatLeft.setVisibility(View.VISIBLE);
+            holder.ivIconRight.setVisibility(View.GONE);
+            holder.ivIconLeft.setVisibility(View.VISIBLE);
+
         }
         else {
             holder.tvChatRight.setText(mClassChat.get(position).getContent());
             holder.tvChatRight.setVisibility(View.VISIBLE);
             holder.tvChatLeft.setVisibility(View.GONE);
+            holder.ivIconRight.setVisibility(View.VISIBLE);
+            holder.ivIconLeft.setVisibility(View.GONE);
         }
     }
 
@@ -61,17 +67,20 @@ public class ClassroomAdapter extends RecyclerView.Adapter<ClassroomAdapter.View
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvChatLeft ;
         TextView tvChatRight;
+        ImageView ivIconLeft;
+        ImageView ivIconRight;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvChatLeft = (TextView) itemView.findViewById(R.id.tv_classroom_chat_left);
             tvChatRight = (TextView) itemView.findViewById(R.id.tv_classroom_chat_right);
+            ivIconLeft = (ImageView) itemView.findViewById(R.id.iv_icon_left);
+            ivIconRight = (ImageView) itemView.findViewById(R.id.iv_icon_right);
         }
     }
 
     private String getUserTeachear(){
         String s = AVUser.getCurrentUser().getUsername();
-        Log.d("isisis",s+"123");
         return s;
     }
 }

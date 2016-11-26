@@ -50,9 +50,9 @@ public class CreateClassroomActivity extends BaseActivity {
         mToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white));
 
         etContent = (EditText) findViewById(R.id.et_Content);
-        etBeginDate = (EditText) findViewById(R.id.et_begin_date);
+/*        etBeginDate = (EditText) findViewById(R.id.et_begin_date);
         etBeginTime = (EditText) findViewById(R.id.et_begin_time);
-        etEndTime = (EditText) findViewById(R.id.et_end_time);
+        etEndTime = (EditText) findViewById(R.id.et_end_time);*/
     }
 
     @Override
@@ -115,9 +115,9 @@ public class CreateClassroomActivity extends BaseActivity {
     private void putClassroom(){
         AVObject classroom = new AVObject("Classroom");
         classroom.put("content", etContent.getText().toString());
-        classroom.put("beginDate", etBeginDate.getText().toString());
+       /* classroom.put("beginDate", etBeginDate.getText().toString());
         classroom.put("beginTime", etBeginTime.getText().toString());
-        classroom.put("endTime",etEndTime.getText().toString());
+        classroom.put("endTime",etEndTime.getText().toString());*/
         classroom.put("name", AVUser.getCurrentUser().getUsername());
         classroom.saveInBackground(new SaveCallback() {
             @Override

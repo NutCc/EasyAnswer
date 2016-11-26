@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.avos.avoscloud.AVUser;
 
 import cn.nutsky.nutc.easyanswer.R;
 import cn.nutsky.nutc.easyanswer.ui.activity.BecomeTeacherActivity;
@@ -30,6 +34,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private Button btBecomeTeacher;
     private Intent intent;
     private TextView tvMyQuestion;
+    private TextView tvName;
+    private EditText etMail;
 
     @Nullable
     @Override
@@ -44,6 +50,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         btExitLogin = (Button) view.findViewById(R.id.bt_exit_login);
         btBecomeTeacher = (Button) view.findViewById(R.id.bt_become_teacher);
         tvMyQuestion = (TextView) view.findViewById(R.id.tv_my_question);
+        tvName = (TextView) view.findViewById(R.id.tv_name);
+        tvName.setText(AVUser.getCurrentUser().getUsername());
+        etMail = (EditText) view.findViewById(R.id.et_mail);
+        etMail.setText(AVUser.getCurrentUser().getEmail());
         btExitLogin.setOnClickListener(this);
         btBecomeTeacher.setOnClickListener(this);
         tvMyQuestion.setOnClickListener(this);
@@ -53,7 +63,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_my_question:
-                Toast.makeText(getContext(),"aaa",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"我的问题",Toast.LENGTH_SHORT).show();
                 intent = new Intent(getContext(), MyQuestionActivity.class);
                 startActivity(intent);
                 break;

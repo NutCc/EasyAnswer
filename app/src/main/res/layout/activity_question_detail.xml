@@ -27,7 +27,7 @@
                     android:paddingRight="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NutC"
+                    tools:text="NutC"
                     android:textSize="16dp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/white"
@@ -39,14 +39,14 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2016-11-21"/>
+                    tools:text="2016-11-21"/>
                 <TextView
                     android:id="@+id/tv_question_detail"
                     android:padding="16dp"
                     android:layout_below="@id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="我是详细的问题"/>
+                    tools:text="我是详细的问题"/>
 
                 <View
                     android:layout_marginRight="6dp"

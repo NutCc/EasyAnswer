@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal">
-        <EditText
+        <!--<EditText
             android:id="@+id/et_begin_date"
             android:background="@drawable/shape_edit"
             android:layout_width="0dp"
@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:hint="结束时刻"
-            android:layout_weight="1"/>
+            android:layout_weight="1"/>-->
 
     </LinearLayout>
 

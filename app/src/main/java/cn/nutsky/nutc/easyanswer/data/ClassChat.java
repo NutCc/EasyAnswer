@@ -13,8 +13,13 @@ public class ClassChat {
     private String ALC;
     private String createdAt;
     private String updatedAt;
+    public boolean isMe;
 
     public ClassChat(String content) {
+        this.content = content;
+    }
+    public ClassChat(String content, boolean isMe) {
+        this.isMe = isMe;
         this.content = content;
     }
 
